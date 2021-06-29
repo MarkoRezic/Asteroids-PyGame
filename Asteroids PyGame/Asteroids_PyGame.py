@@ -119,11 +119,11 @@ while run:
             # izaberi nasumičnu veličinu od 1-3
             ran = random.choice([1,1,1,2,2,3])
             asteroids.append(Asteroid(ran))
-        # stvori zvijezdu svakih 20 sekundi
-        if count % 600 == 0:
+        # stvori zvijezdu svakih 25 sekundi
+        if count % 1500 == 0:
             stars.append(Star())
         # stvori vanzemaljca svakih 12 sekundi
-        if count % 320 == 0:
+        if count % 720 == 0:
             aliens.append(Alien())
         for i, a in enumerate(aliens):
             a.move()
@@ -214,6 +214,7 @@ while run:
                 stars.pop(stars.index(s))
                 break
             if s.checkCollision(player.x - player.w//2, player.y-player.h//2, player.w, player.h):
+                lives += 1
                 rapidFire = True
                 rfStart = count
                 supernovas.append(SuperNova(player.x, player.y))
@@ -222,6 +223,7 @@ while run:
                 stars.pop(stars.index(s))
             for b in playerBullets:
                 if b.checkCollision(s.x, s.y, s.w, s.h):
+                    lives += 1
                     rapidFire = True
                     rfStart = count
                     stars.pop(stars.index(s))
